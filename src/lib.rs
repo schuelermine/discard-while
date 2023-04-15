@@ -90,7 +90,7 @@ pub trait DiscardWhile: Iterator {
     ///
     /// This function might panic if the iterator has more than `usize::MAX` non-matching elements.
     ///
-    /// # Example
+    /// # Examples
     ///
     /// Basic usage:
     ///
