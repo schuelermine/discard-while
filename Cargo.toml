@@ -1,0 +1,10 @@
+[package]
+name = "discard-while"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+readme = "README.md"
+description = "Get the first non-matching element, and the amount of discarded elements."
+repository = "https://github.com/schuelermine/discard-while"
+keywords = ["no-std", "iterator"]
+categories = ["no-std", "no-std::no-alloc", "rust-patterns"]
