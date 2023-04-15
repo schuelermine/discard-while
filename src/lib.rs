@@ -15,7 +15,7 @@
 ///
 /// The method does no guarding against overflows, so if there are more than `usize::MAX`
 /// non-matching elements, it either produces the wrong result or panics.
-/// If debug assertions are enabled, a panic is guaranteed.
+/// If overflow checks are enabled, a panic is guaranteed.
 ///
 /// # Panics
 ///
@@ -84,7 +84,7 @@ pub trait DiscardWhile: Iterator {
     ///
     /// The method does no guarding against overflows, so if there are more than `usize::MAX`
     /// non-matching elements, it either produces the wrong result or panics.
-    /// If debug assertions are enabled, a panic is guaranteed.
+    /// If overflow checks are enabled, a panic is guaranteed.
     ///
     /// # Panics
     ///
