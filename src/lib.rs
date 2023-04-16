@@ -11,6 +11,9 @@
 ///
 /// This is similar to a combination of [`find`] and [`position`].
 ///
+/// _Note_: This function takes any implementation of [`IntoIterator`], which includes
+/// iterators themselves and mutable references to them.
+///
 /// # Overflow Behavior
 ///
 /// The method does no guarding against overflows, so if there are more than `usize::MAX`
@@ -38,10 +41,9 @@
 ///
 /// ```
 /// # use discard_while::discard_while;
-/// let mut range = 1..=10;
-/// let result = discard_while(&mut range, |&n| true);
-/// assert_eq!(result, (None, 10));
-/// assert!(range.is_empty());
+/// let arr = [6, 5, 4, 3, 2, 1];
+/// let result = discard_while(arr, |&n| true);
+/// assert_eq!(result, (None, 6));
 /// ```
 ///
 /// If the first element that is encountered does not fulfill the condition,
@@ -49,18 +51,19 @@
 ///
 /// ```
 /// # use discard_while::discard_while;
-/// let mut range = 1..=10;
+/// let mut range = 2..=8;
 /// let result = discard_while(&mut range, |&n| false);
-/// assert_eq!(result, (Some(1), 0));
-/// assert_eq!(range, 2..=10);
+/// assert_eq!(result, (Some(2), 0));
+/// assert_eq!(range, 3..=8);
 /// ```
 ///
 /// [`find`]: Iterator::find
 /// [`position`]: Iterator::position
 pub fn discard_while<T>(
-    iter: &mut impl Iterator<Item = T>,
+    iter: impl IntoIterator<Item = T>,
     mut cond: impl FnMut(&T) -> bool,
 ) -> (Option<T>, usize) {
+    let iter = iter.into_iter();
     let mut i = 0;
     for next in iter {
         if !cond(&next) {
