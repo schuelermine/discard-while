@@ -62,7 +62,7 @@ pub fn discard_while<T>(
     mut cond: impl FnMut(&T) -> bool,
 ) -> (Option<T>, usize) {
     let mut i = 0;
-    while let Some(next) = iter.next() {
+    for next in iter {
         if !cond(&next) {
             return (Some(next), i);
         }
